@@ -1,25 +1,24 @@
 # ![logo](https://raw.githubusercontent.com/ThunderCoreWoW/tc-assets/img/logo.png) ThunderCore
 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
-[![CodeFactor](https://www.codefactor.io/repository/github/ThunderCoreWoW/thundercore-wotlk/badge)](https://www.codefactor.io/repository/github/ThunderCoreWoW/thundercore-wotlk)
 [![StackOverflow](http://img.shields.io/badge/stackoverflow-thundercore-blue.svg?logo=stackoverflow)](https://stackoverflow.com/questions/tagged/thundercore?sort=newest "Ask / browse questions here")
 [![Discord](https://img.shields.io/discord/217589275766685707?logo=discord&logoColor=white)](https://discord.com/bGzXnwtF "Our community hub on Discord")
 
 ## Build Status
 
 [![nopch-build](https://github.com/ThunderCoreWoW/thundercore-wotlk/actions/workflows/core-build-nopch.yml/badge.svg?branch=master)](https://github.com/ThunderCoreWoW/thundercore-wotlk/actions/workflows/core-build-nopch.yml)
-[![core-modules-build](https://github.com/ThunderCoreWoW/thundercore-wotlk/workflows/core-modules-build/badge.svg?branch=master&event=push)](https://github.com/ThunderCoreWoW/thundercore-wotlk/actions?query=workflow%3Tcore-modules-build+branch%3Amaster+event%3Apush)
+[![core-modules-build](https://github.com/ThunderCoreWoW/thundercore-wotlk/workflows/core_modules_build/badge.svg?branch=master&event=push)](https://github.com/ThunderCoreWoW/thundercore-wotlk/actions?query=workflow%3Tcore-modules-build+branch%3Amaster+event%3Apush)
 [![windows-build](https://github.com/ThunderCoreWoW/thundercore-wotlk/workflows/windows-build/badge.svg?branch=master&event=push)](https://github.com/ThunderCoreWoW/thundercore-wotlk/actions?query=workflow%3Awindows-build+branch%3Amaster+event%3Apush)
 [![macos-build](https://github.com/ThunderCoreWoW/thundercore-wotlk/workflows/macos-build/badge.svg?branch=master&event=push)](https://github.com/ThunderCoreWoW/thundercore-wotlk/actions?query=workflow%3Amacos-build+branch%3Amaster+event%3Apush)
 [![docker-build](https://github.com/ThunderCoreWoW/thundercore-wotlk/workflows/docker-build/badge.svg?branch=master&event=push)](https://github.com/ThunderCoreWoW/thundercore-wotlk/actions?query=workflow%3Adocker-build+branch%3Amaster+event%3Apush)
 
 ## Introduccion
 
-ThunderCore es una aplicacion y un marco de servidor de juegos de codigo abierto diseñado para alojar juegos de rol multijugador masivos en linea (MMORPG). Est basado en el popular MMORPG World of Warcraft (WoW) y busca recrear la experiencia de juego del juego original a partir del parche 3.3.5a.
+ThunderCore es una aplicacion y un marco de servidor de juegos de codigo abierto diseñado para alojar juegos de rol multijugador masivos en linea (MMORPG). Esta bado en el popular MMORPG World of Warcraft (WoW) y busca recrear la experiencia de juego del juego original a partir del parche 3.3.5a.
 
 El codigo original se basa en AzerothCore, TrinityCore y SunwellCore y desde entonces ha tenido un desarrollo extenso para mejorar la estabilidad, la mecanica del juego y la modularidad del mismo. TC tambien se ha convertido en un proyecto impulsado por la comunidad con una cantidad significativa de colaboradores y desarrolladores. Esta escrito en C++ y proporciona una base salida para crear servidores privados que imitan la mecanica y el comportamiento de los servidores oficiales de WoW.
 
-## Philosophy
+## Filosofia
 
 Nuestro objetivo principal es crear un servidor de juegos jugable, que ofrezca una experiencia de juego totalmente funcional.
 
@@ -33,11 +32,11 @@ Contenido tipo Blizz
   * Nos esforzamos por hacer que todo el contenido del juego sea similar al de Blizzard. Por lo tanto, tenemos estandares altos para las correcciones que se realizan.
   
 * Personalizacion
-  * Es facil personalizar tu experiencia usando mdulos .
+  * Es facil personalizar tu experiencia usando modulos .
 Impulsado por la comunidad
 
 * Community driven
-  * ThunderCore tiene una comunidad activa de desarrolladores, colaboradores y usuarios que colaboran, comparten conocimientos y brindan apoyo a travs de foros, canales de Discord y otras plataformas de comunicacin
+  * ThunderCore tiene una comunidad activa de desarrolladores, colaboradores y usuarios que colaboran, comparten conocimientos y brindan apoyo a traves de foros, canales de Discord y otras plataformas de comunicacion
   
 ### Modulos
 
