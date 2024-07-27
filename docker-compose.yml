@@ -1,0 +1,217 @@
+# docker-compose.yml for ThunderCore.
+#
+# Start the server with `docker compose up -d --build`
+#
+# Don't make changes this file! make a `docker-compose.override.yml` and make your
+# changes there instead.
+
+services:
+  tc-database:
+    container_name: tc-database
+    image: mysql:8.3
+    networks:
+      - tc-network
+    ports:
+      - ${DOCKER_DB_EXTERNAL_PORT:-3306}:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DOCKER_DB_ROOT_PASSWORD:-password}
+    volumes:
+      - type: volume
+        source: tc-database
+        target: /var/lib/mysql
+    restart: unless-stopped
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=$$MYSQL_ROOT_PASSWORD --execute \"SHOW DATABASES;\""
+      interval: 5s
+      timeout: 10s
+      retries: 40
+
+  tc-db-import:
+    container_name: tc-db-import
+    image: tcore/tc-wotlk-db-import:${DOCKER_IMAGE_TAG:-master}
+    networks:
+      - tc-network
+    build:
+      context: .
+      target: db-import
+      dockerfile: apps/docker/Dockerfile
+      args:
+        USER_ID: ${DOCKER_USER_ID:-1000}
+        GROUP_ID: ${DOCKER_GROUP_ID:-1000}
+        DOCKER_USER: ${DOCKER_USER:-tcore}
+    environment:
+      TC_DATA_DIR: "/thundercore/env/dist/data"
+      TC_LOGS_DIR: "/thundercore/env/dist/logs"
+      TC_LOGIN_DATABASE_INFO: "tc-database;3306;root;${DOCKER_DB_ROOT_PASSWORD:-password};thunder_auth"
+      TC_WORLD_DATABASE_INFO: "tc-database;3306;root;${DOCKER_DB_ROOT_PASSWORD:-password};thunder_world"
+      TC_CHARACTER_DATABASE_INFO: "tc-database;3306;root;${DOCKER_DB_ROOT_PASSWORD:-password};thunder_characters"
+    volumes:
+      - ${DOCKER_VOL_ETC:-./env/dist/etc}:/thundercore/env/dist/etc
+      # [osxfs optimization]: https://stackoverflow.com/a/63437557/1964544
+      - ${DOCKER_VOL_LOGS:-./env/dist/logs}:/thundercore/env/dist/logs:delegated
+    depends_on:
+      tc-database:
+        condition: service_healthy
+
+  tc-worldserver:
+    container_name: tc-worldserver
+    image: tcore/tc-wotlk-worldserver:${DOCKER_IMAGE_TAG:-master}
+    build:
+      context: .
+      target: worldserver
+      dockerfile: apps/docker/Dockerfile
+      args:
+        USER_ID: ${DOCKER_USER_ID:-1000}
+        GROUP_ID: ${DOCKER_GROUP_ID:-1000}
+        DOCKER_USER: ${DOCKER_USER:-tcore}
+    networks:
+      - tc-network
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    env_file:
+        ${DOCKER_TC_ENV_FILE:-conf/dist/env.ac}
+    environment:
+      TC_DATA_DIR: "/thundercore/env/dist/data"
+      TC_LOGS_DIR: "/thundercore/env/dist/logs"
+      TC_LOGIN_DATABASE_INFO: "tc-database;3306;root;${DOCKER_DB_ROOT_PASSWORD:-password};thunder_auth"
+      TC_WORLD_DATABASE_INFO: "tc-database;3306;root;${DOCKER_DB_ROOT_PASSWORD:-password};thunder_world"
+      TC_CHARACTER_DATABASE_INFO: "tc-database;3306;root;${DOCKER_DB_ROOT_PASSWORD:-password};thunder_characters"
+      TC_FAKEPLAYERS_DATABASE_INFO: "tc-database;3306;root;${DOCKER_DB_ROOT_PASSWORD:-password};thunder_fakeplayers"
+    ports:
+      - ${DOCKER_WORLD_EXTERNAL_PORT:-8085}:8085
+      - ${DOCKER_SOAP_EXTERNAL_PORT:-7878}:7878
+    volumes:
+      - ${DOCKER_VOL_ETC:-./env/dist/etc}:/thundercore/env/dist/etc
+      # [osxfs optimization]: https://stackoverflow.com/a/63437557/1964544
+      - ${DOCKER_VOL_LOGS:-./env/dist/logs}:/thundercore/env/dist/logs:delegated
+      # client data
+      - ${DOCKER_VOL_DATA:-tc-client-data}:/thundercore/env/dist/data/:ro
+    depends_on:
+      tc-database:
+        condition: service_healthy
+      tc-db-import:
+        condition: service_completed_successfully
+      tc-client-data-init:
+        condition: service_completed_successfully
+
+  tc-authserver:
+    container_name: tc-authserver
+    image: tcore/tc-wotlk-authserver:${DOCKER_IMAGE_TAG:-master}
+    build:
+      context: .
+      target: authserver
+      dockerfile: apps/docker/Dockerfile
+      args:
+        USER_ID: ${DOCKER_USER_ID:-1000}
+        GROUP_ID: ${DOCKER_GROUP_ID:-1000}
+        DOCKER_USER: ${DOCKER_USER:-tcore}
+    networks:
+      - tc-network
+    tty: true
+    restart: unless-stopped
+    env_file:
+        ${DOCKER_TC_ENV_FILE:-conf/dist/env.ac}
+    environment:
+      TC_LOGS_DIR: "/thundercore/env/dist/logs"
+      TC_TEMP_DIR: "/thundercore/env/dist/temp"
+      TC_LOGIN_DATABASE_INFO: "tc-database;3306;root;${DOCKER_DB_ROOT_PASSWORD:-password};thunder_auth"
+    volumes:
+      - ${DOCKER_VOL_ETC:-./env/dist/etc}:/thundercore/env/dist/etc
+      # [osxfs optimization]: https://stackoverflow.com/a/63437557/1964544
+      - ${DOCKER_VOL_LOGS:-./env/dist/logs}:/thundercore/env/dist/logs:delegated
+    ports:
+      - ${DOCKER_AUTH_EXTERNAL_PORT:-3724}:3724
+    depends_on:
+      tc-database:
+        condition: service_healthy
+      tc-db-import:
+        condition: service_completed_successfully
+
+  tc-client-data-init:
+    container_name: tc-client-data-init
+    image: tcore/tc-wotlk-client-data:${DOCKER_IMAGE_TAG:-master}
+    build:
+      context: .
+      target: client-data
+      dockerfile: apps/docker/Dockerfile
+      args:
+        USER_ID: ${DOCKER_USER_ID:-1000}
+        GROUP_ID: ${DOCKER_GROUP_ID:-1000}
+        DOCKER_USER: ${DOCKER_USER:-tcore}
+    volumes:
+      - ${DOCKER_VOL_CLIENT_DATA:-tc-client-data}:/thundercore/env/dist/data
+
+  # used for extracting maps from files shipped with game client
+  # Most of the time this shouldn't be needed
+  tc-tools:
+    container_name: tc-tools
+    image: tcore/tc-wotlk-tools:${DOCKER_IMAGE_TAG:-master}
+    build:
+      context: .
+      target: tools
+      dockerfile: apps/docker/Dockerfile
+      args:
+        USER_ID: ${DOCKER_USER_ID:-1000}
+        GROUP_ID: ${DOCKER_GROUP_ID:-1000}
+        DOCKER_USER: ${DOCKER_USER:-tcore}
+    working_dir: /thundercore/env/client/
+    volumes:
+      # this is not the directory of the extracted data! It's the client folder used by the extractors
+      - ${DOCKER_TC_CLIENT_FOLDER:-./var/client}:/thundercore/env/dist/bin/Data
+    # Activate with `docker compose --profile tools ...`
+    profiles: [tools]
+
+  # Dev server with the ./thundercore folder binded from the host
+  # Please use Linux, WSL2 or any ext-compatible filesystem
+  # to avoid performance issues
+  #
+  # This is primarily intended for use with the "devcontainer" project
+  #
+  # This is provided primarily for development, though it doesn't receive
+  # first-class support
+  tc-dev-server:
+    tty: true
+    image: tcore/tc-wotlk-dev-server:${DOCKER_IMAGE_TAG:-master}
+    build:
+      context: .
+      dockerfile: ./apps/docker/Dockerfile.dev-server
+      args:
+        USER_ID: ${DOCKER_USER_ID:-1000}
+        GROUP_ID: ${DOCKER_GROUP_ID:-1000}
+        DOCKER_USER: ${DOCKER_USER:-tcore}
+      target: dev
+    env_file:
+        ${DOCKER_TC_ENV_FILE:-conf/dist/env.tc}
+    environment:
+      TC_DATA_DIR: "/thundercore/env/dist/data"
+      TC_LOGS_DIR: "/thundercore/env/dist/logs"
+      TC_LOGIN_DATABASE_INFO: "tc-database;3306;root;${DOCKER_DB_ROOT_PASSWORD:-password};thunder_auth"
+      TC_WORLD_DATABASE_INFO: "tc-database;3306;root;${DOCKER_DB_ROOT_PASSWORD:-password};thunder_world"
+      TC_CHARACTER_DATABASE_INFO: "tc-database;3306;root;${DOCKER_DB_ROOT_PASSWORD:-password};thunder_characters"
+    ports:
+      - ${DOCKER_AUTH_EXTERNAL_PORT:-3724}:3724
+      - ${DOCKER_WORLD_EXTERNAL_PORT:-8085}:8085
+      - ${DOCKER_SOAP_EXTERNAL_PORT:-7878}:7878
+    volumes:
+      - ${DOCKER_VOL_ROOT:-.}:/azerothcore:cached
+      # [osxfs optimization]: https://stackoverflow.com/a/63437557/1964544
+      - tc-build-dev:/thundercore/var/build
+      - tc-ccache-dev:/thundercore/var/ccache
+      # this is not the directory of the extracted data! It's the client folder used by the extractors
+      - ${DOCKER_TC_CLIENT_FOLDER:-./var/client}:/thundercore/env/dist/bin/Data
+    # Activate with `docker compose --profile dev ...`
+    profiles: [dev]
+    depends_on:
+      tc-database:
+        condition: service_healthy
+
+volumes:
+  tc-database:
+  tc-client-data:
+  # Used for dev server
+  tc-build-dev:
+  tc-ccache-dev:
+
+networks:
+  tc-network:
