@@ -7,7 +7,6 @@
 ## Build Status
 
 [![nopch-build](https://github.com/ThunderCoreWoW/thundercore-wotlk/actions/workflows/core-build-nopch.yml/badge.svg?branch=master)](https://github.com/ThunderCoreWoW/thundercore-wotlk/actions/workflows/core-build-nopch.yml)
-[![core-modules-build](https://github.com/ThunderCoreWoW/thundercore-wotlk/workflows/core_modules_build/badge.svg?branch=master&event=push)](https://github.com/ThunderCoreWoW/thundercore-wotlk/actions?query=workflow%3Tcore-modules-build+branch%3Amaster+event%3Apush)
 [![windows-build](https://github.com/ThunderCoreWoW/thundercore-wotlk/workflows/windows-build/badge.svg?branch=master&event=push)](https://github.com/ThunderCoreWoW/thundercore-wotlk/actions?query=workflow%3Awindows-build+branch%3Amaster+event%3Apush)
 [![macos-build](https://github.com/ThunderCoreWoW/thundercore-wotlk/workflows/macos-build/badge.svg?branch=master&event=push)](https://github.com/ThunderCoreWoW/thundercore-wotlk/actions?query=workflow%3Amacos-build+branch%3Amaster+event%3Apush)
 [![docker-build](https://github.com/ThunderCoreWoW/thundercore-wotlk/workflows/docker-build/badge.svg?branch=master&event=push)](https://github.com/ThunderCoreWoW/thundercore-wotlk/actions?query=workflow%3Adocker-build+branch%3Amaster+event%3Apush)
