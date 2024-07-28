@@ -1,0 +1,85 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "ThunderCore: Dashboard",
+        "type": "shell",
+        "command": "./tcore.sh",
+        "group": "none",
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "ThunderCore: Import/update database",
+        "type": "shell",
+        "command": "./tcore.sh db-assembler import-all",
+        "group": "build",
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "ThunderCore: download client-data",
+        "type": "shell",
+        "command": "./tcore.sh client-data",
+        "group": "none",
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "ThunderCore: Clean build",
+        "type": "shell",
+        "command": "./tcore.sh compiler clean",
+        "group": "build",
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "ThunderCore: Build",
+        "type": "shell",
+        "command": "./tcore.sh compiler build",
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "ThunderCore: Run authserver (restarter)",
+        "type": "shell",
+        "command": "./tcore.sh run-authserver",
+        "group": "none",
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "ThunderCore: Run worldserver (restarter)",
+        "type": "shell",
+        "command": "./tcore.sh run-worldserver",
+        "group": "none",
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        },
+        "problemMatcher": []
+      }
+    ]
+  }
