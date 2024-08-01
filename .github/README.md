@@ -69,6 +69,6 @@ Puede consultar la ficha de los autores para obtener mas detalles.
   
 - [Discord server](https://discord.com/bGzXnwtF)
 
-## License
+## ATENCIÓN:
 
-- El nuevo codigo de ThunderCore esta bajo la licencia [GNU AGPL v3](https://www.gnu.org/licenses/agpl-3.0.en.html)
+- Este Source está aún en desarrollo se espera que en las próximas semanas esté disponible completamente.
