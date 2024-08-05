@@ -1,74 +1,87 @@
-# ![logo](https://raw.githubusercontent.com/ThunderCoreWoW/tc-assets/img/logo.png) ThunderCore
+# ![logo](https://community.trinitycore.org/public/style_images/1_trinitycore.png) TrinityCore (master)
 
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
-[![StackOverflow](http://img.shields.io/badge/stackoverflow-thundercore-blue.svg?logo=stackoverflow)](https://stackoverflow.com/questions/tagged/thundercore?sort=newest "Ask / browse questions here")
-[![Discord](https://img.shields.io/discord/217589275766685707?logo=discord&logoColor=white)](https://discord.com/bGzXnwtF "Our community hub on Discord")
+[![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/TrinityCore/TrinityCore.svg)](https://isitmaintained.com/project/TrinityCore/TrinityCore "Average time to resolve an issue") [![Percentage of issues still open](https://isitmaintained.com/badge/open/TrinityCore/TrinityCore.svg)](https://isitmaintained.com/project/TrinityCore/TrinityCore "Percentage of issues still open")
 
-## Build Status
+--------------
 
-[![nopch-build](https://github.com/ThunderCoreWoW/thundercore-wotlk/actions/workflows/core-build-nopch.yml/badge.svg?branch=master)](https://github.com/ThunderCoreWoW/thundercore-wotlk/actions/workflows/core-build-nopch.yml)
-[![windows-build](https://github.com/ThunderCoreWoW/thundercore-wotlk/workflows/windows-build/badge.svg?branch=master&event=push)](https://github.com/ThunderCoreWoW/thundercore-wotlk/actions?query=workflow%3Awindows-build+branch%3Amaster+event%3Apush)
-[![macos-build](https://github.com/ThunderCoreWoW/thundercore-wotlk/workflows/macos-build/badge.svg?branch=master&event=push)](https://github.com/ThunderCoreWoW/thundercore-wotlk/actions?query=workflow%3Amacos-build+branch%3Amaster+event%3Apush)
-[![docker-build](https://github.com/ThunderCoreWoW/thundercore-wotlk/workflows/docker-build/badge.svg?branch=master&event=push)](https://github.com/ThunderCoreWoW/thundercore-wotlk/actions?query=workflow%3Adocker-build+branch%3Amaster+event%3Apush)
 
-## Introduccion
+* [Build Status](#build-status)
+* [Introduction](#introduction)
+* [Requirements](#requirements)
+* [Install](#install)
+* [Reporting issues](#reporting-issues)
+* [Submitting fixes](#submitting-fixes)
+* [Copyright](#copyright)
+* [Authors &amp; Contributors](#authors--contributors)
+* [Links](#links)
+
+
+
+## Estado de construcción
+
+7.3.5 | 
+:------------:
+[![master Build Status](https://circleci.com/gh/TrinityCore/TrinityCore/tree/master.svg?style=shield)](https://circleci.com/gh/TrinityCore/TrinityCore/tree/master) | [![3.3.5 Build Status](https://circleci.com/gh/TrinityCore/TrinityCore/tree/3.3.5.svg?style=shield)](https://circleci.com/gh/TrinityCore/TrinityCore/tree/3.3.5) | [![wotlk_classic Build Status](https://circleci.com/gh/TrinityCore/TrinityCore/tree/wotlk_classic.svg?style=shield)](https://circleci.com/gh/TrinityCore/TrinityCore/tree/wotlk_classic)
+[![master Build status](https://ci.appveyor.com/api/projects/status/54d0u1fxe50ad80o/branch/master?svg=true)](https://ci.appveyor.com/project/DDuarte/trinitycore/branch/master) | [![Build status](https://ci.appveyor.com/api/projects/status/54d0u1fxe50ad80o/branch/3.3.5?svg=true)](https://ci.appveyor.com/project/DDuarte/trinitycore/branch/3.3.5) | [![Build status](https://ci.appveyor.com/api/projects/status/54d0u1fxe50ad80o/branch/wotlk_classic?svg=true)](https://ci.appveyor.com/project/DDuarte/trinitycore/branch/wotlk_classic)
+[![master GCC Build status](https://github.com/TrinityCore/TrinityCore/actions/workflows/gcc-build.yml/badge.svg?branch=master&event=push)](https://github.com/TrinityCore/TrinityCore/actions?query=workflow%3AGCC+branch%3Amaster+event%3Apush) | [![3.3.5 GCC Build status](https://github.com/TrinityCore/TrinityCore/actions/workflows/gcc-build.yml/badge.svg?branch=3.3.5&event=push)](https://github.com/TrinityCore/TrinityCore/actions?query=workflow%3AGCC+branch%3A3.3.5+event%3Apush) | [![wotlk_classic GCC Build status](https://github.com/TrinityCore/TrinityCore/actions/workflows/gcc-build.yml/badge.svg?branch=wotlk_classic&event=push)](https://github.com/TrinityCore/TrinityCore/actions?query=workflow%3AGCC+branch%3Awotlk_classic+event%3Apush)
+[![master macOS arm64 Build status](https://github.com/TrinityCore/TrinityCore/actions/workflows/macos-arm-build.yml/badge.svg?branch=master&event=push)](https://github.com/TrinityCore/TrinityCore/actions?query=workflow%3AGCC+branch%3Amaster+event%3Apush) | | 
+
+## Introducción
 
 ThunderCore es una aplicacion y un marco de servidor de juegos de codigo abierto diseñado para alojar juegos de rol multijugador masivos en linea (MMORPG). Esta bado en el popular MMORPG World of Warcraft (WoW) y busca recrear la experiencia de juego del juego original a partir del parche 3.3.5a.
 
 El codigo original se basa en AzerothCore, TrinityCore y SunwellCore y desde entonces ha tenido un desarrollo extenso para mejorar la estabilidad, la mecanica del juego y la modularidad del mismo. TC tambien se ha convertido en un proyecto impulsado por la comunidad con una cantidad significativa de colaboradores y desarrolladores. Esta escrito en C++ y proporciona una base salida para crear servidores privados que imitan la mecanica y el comportamiento de los servidores oficiales de WoW.
 
-## Filosofia
 
-Nuestro objetivo principal es crear un servidor de juegos jugable, que ofrezca una experiencia de juego totalmente funcional.
+## Requirementos
+* Microsoft Visual Studio 2017 x64
+* Boost 1.64
+* Open SSL 1.0
+* CMake
+* Git
+* Github Desktop
+* MySQL Server 5.1-8.3
 
-Estos son los puntos principales en los que nos centramos:
+## Install
 
-* Estabilidad
-  * Nos aseguramos de que todos los cambios pasen los CIs antes de fusionarse en la rama maestra.
-Contenido tipo Blizz
+Detailed installation guides are available in the [wiki](https://trinitycore.info/en/home) for
+Windows, Linux and macOS.
 
-* Contenido Blizzlike
-  * Nos esforzamos por hacer que todo el contenido del juego sea similar al de Blizzard. Por lo tanto, tenemos estandares altos para las correcciones que se realizan.
-  
-* Personalizacion
-  * Es facil personalizar tu experiencia usando modulos .
-Impulsado por la comunidad
 
-* Community driven
-  * ThunderCore tiene una comunidad activa de desarrolladores, colaboradores y usuarios que colaboran, comparten conocimientos y brindan apoyo a traves de foros, canales de Discord y otras plataformas de comunicacion
-  
-### Modulos
+## Reporte de problemas
 
-ThunderCore esta diseñado para ser altamente modular, lo que permite a los desarrolladores ampliar y personalizar el juego para adaptarlo a sus preferencias o crear experiencias de juego unicas. Esta flexibilidad permite agregar caracteristicas, contenido y modificaciones personalizadas.
+Issues can be reported via the [Github issue tracker](https://github.com/TrinityCore/TrinityCore/labels/Branch-master).
 
-Tenemos muchos modulos ya realizados por la comunidad, muchos de los cuales se pueden encontrar en el Catalogo de Modulos .
+Please take the time to review existing issues before submitting your own to
+prevent duplicates.
 
-## Instalacion
+In addition, thoroughly read through the [issue tracker guide](https://community.trinitycore.org/topic/37-the-trinitycore-issuetracker-and-you/) to ensure
+your report contains the required information. Incorrect or poorly formed
+reports are wasteful and are subject to deletion.
 
-.EN EDICION.
 
-## Contribuyendo
+## Submitting fixes
 
-ThunderCore tambien puede servir como un recurso de aprendizaje para los aspirantes a desarrolladores que quieran entender como funcionan los servidores de WoW, como se estructuran los MMORPG, como se crean los emuladores de servidores de juegos o mejorar sus conocimientos de C++ y SQL.
+C++ fixes are submitted as pull requests via Github. For more information on how to
+properly submit a pull request, read the [how-to: maintain a remote fork](https://community.trinitycore.org/topic/9002-howto-maintain-a-remote-fork-for-pull-requests-tortoisegit/).
+For SQL only fixes, open a ticket; if a bug report exists for the bug, post on an existing ticket.
 
-Si quieres contribuir al proyecto, en nuestra wiki encontraras muchos recursos que te guiaran .
 
-Tambien le recomendamos que lea nuestro Codigo de conducta del colaborador .
+## Copyright
 
-Sientete libre de unirte a nuestro servidor Discord .
+License: GPL 2.0
 
-- Haga clic en el boton "⭐ Estrella" para ayudarnos a ganar mas visibilidad en Github!
+Read file [COPYING](COPYING).
 
-## Autores & Colaboradores
 
-El proyecto nacio en 2024 a partir de AzerothCore, TrinityCore y SunwellCore. Lamentablemente, SunwellCore se publico sin ningun historial de Git, por lo que en Git no hay creditos para todos los colaboradores anteriores a 2023.
+## Authors &amp; Contributors
 
-Puede consultar la ficha de los autores para obtener mas detalles.
+Read file [AUTHORS](AUTHORS).
 
-## Enlaces Importantes
-  
-- [Discord server](https://discord.com/bGzXnwtF)
 
-## ATENCIÓN:
+## Links
 
-- Este Source está aún en desarrollo se espera que en las próximas semanas esté disponible completamente.
+* [Website](https://www.trinitycore.org)
+* [Wiki](https://www.trinitycore.info)
+* [Forums](https://talk.trinitycore.org/)
+* [Discord](https://discord.trinitycore.org/)
