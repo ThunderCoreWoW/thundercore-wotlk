@@ -21,8 +21,8 @@
 
 WoW Legion 7.3.5 | 
 :------------:
-[![master Build Status](https://circleci.com/gh/ThunderCoreWoW/ThunderCore/tree/master.svg?style=shield)](https://circleci.com/gh/ThunderCoreWoW/ThunderCore/tree/master) | [![7.3.5 Build Status](https://circleci.com/gh/ThunderCoreWoW/ThunderCore/tree/7.3.5.svg?style=shield)](https://circleci.com/gh/ThunderCoreWoW/ThunderCore/tree/3.3.5)
-[![master GCC Build status](https://github.com/ThunderCoreWoW/ThunderCore/actions/workflows/gcc-build.yml/badge.svg?branch=master&event=push)](https://github.com/ThunderCore/ThunderCore/actions?query=workflow%3AGCC+branch%3Amaster+event%3Apush) | [![3.3.5 GCC Build status](https://github.com/ThunderCore/ThunderCore/actions/workflows/gcc-build.yml/badge.svg?branch=3.3.5&event=push)](https://github.com/ThunderCore/ThunderCore/actions?query=workflow%3AGCC+branch%3A3.3.5+event%3Apush) | [![wotlk_classic GCC Build status](https://github.com/ThunderCore/ThunderCore/actions/workflows/gcc-build.yml/badge.svg?branch=wotlk_classic&event=push)](https://github.com/ThunderCore/ThunderCore/actions?query=workflow%3AGCC+branch%3Awotlk_classic+event%3Apush)
+[![master Build Status](https://circleci.com/gh/ThunderCoreWoW/ThunderCore/tree/master.svg?style=shield)](https://circleci.com/gh/ThunderCoreWoW/ThunderCore/tree/master) |
+[![master GCC Build status](https://github.com/ThunderCoreWoW/ThunderCore/actions/workflows/gcc-build.yml/badge.svg?branch=master&event=push)](https://github.com/ThunderCore/ThunderCore/actions?query=workflow%3AGCC+branch%3Amaster+event%3Apush) |
 [![master macOS arm64 Build status](https://github.com/ThunderCoreWoW/ThunderCore/actions/workflows/macos-arm-build.yml/badge.svg?branch=master&event=push)](https://github.com/ThunderCoreWoW/ThunderCore/actions?query=workflow%3AGCC+branch%3Amaster+event%3Apush) | | 
 
 ## Introducción
